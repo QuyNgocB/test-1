@@ -13,7 +13,7 @@ pipeline {
         }
       stage('Push') {
             steps {
-                sh 'docker push test-1/dp-alpine:latest '
+                sh '123 docker push test-1/dp-alpine:latest '
             }
         } 
   }

@@ -1,7 +1,7 @@
 pipeline {
     agent { laber 'linux'}
     options {
-      buildDiscarder (logRotator{ numToKeepStr: '5')}
+      buildDiscarder (logRotator{ numToKeepStr: '5'})
         }
       environment {
         DOCKERHUB_CREDENTIALS = credentials ('dockerhub')
@@ -13,7 +13,7 @@ pipeline {
         }
       stage('Push') {
             steps {
-                sh ' docker push test-1/dp-alpine:latest '
+                sh 'docker push test-1/dp-alpine:latest '
             }
         } 
   }

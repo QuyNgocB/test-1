@@ -1,20 +1,25 @@
 pipeline {
-    agent { laber 'linux'}
+    agent { label 'linux' }
     options {
-      buildDiscarder (logRotator{ numToKeepStr: '5'})
-        }
-      environment {
-        DOCKERHUB_CREDENTIALS = credentials ('dockerhub')
-      }
-      stage('Build') {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
+    stages {
+        stage('Build') {
             steps {
-                sh ' docker build -t test-1/dp-alpine:latest .'
+                script {
+                    sh 'docker build -t test-1/dp-alpine:latest .'
+                }
             }
         }
-      stage('Push') {
+        stage('Push') {
             steps {
-                sh 'docker push test-1/dp-alpine:latest '
+                script {
+                    sh 'docker push test-1/dp-alpine:latest'
+                }
             }
-        } 
-  }
-  
+        }
+    }
+}
